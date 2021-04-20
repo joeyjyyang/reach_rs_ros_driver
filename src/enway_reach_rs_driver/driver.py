@@ -80,8 +80,8 @@ class RosNMEADriver(object):
         else:
             current_time_ref.source = frame_id
 
-        if not self.use_RMC and 'GGA' in parsed_sentence:
-            data = parsed_sentence['GGA']
+        if not self.use_RMC and b'GGA' in parsed_sentence:
+            data = parsed_sentence[b'GGA']
             gps_qual = data['fix_type']
             if gps_qual == 0:
                 current_fix.status.status = NavSatStatus.STATUS_NO_FIX
@@ -133,8 +133,8 @@ class RosNMEADriver(object):
                 
             return current_fix
 
-        elif 'RMC' in parsed_sentence:
-            data = parsed_sentence['RMC']
+        elif b'RMC' in parsed_sentence:
+            data = parsed_sentence[b'RMC']
 
             # Only publish a fix from RMC if the use_RMC flag is set.
             if self.use_RMC:
